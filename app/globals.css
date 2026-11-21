@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+/*
+  Brand type token.
+  --font-brand-file is the loaded face (Inter Tight today, Helvetica Now later).
+  The named stack is the one-line swap target. See lib/fonts.ts and the README.
+*/
+:root {
+  --font-brand: var(--font-brand-file, "Helvetica Neue"), "Helvetica Now Display",
+    "Helvetica Now Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-mono-file), ui-monospace, "SFMono-Regular", Menlo, Consolas,
+    monospace;
+  --black: #000000;
+  --paper: #ffffff;
+  --ink: #0c0c0c;
+  --fg: #f0f0fa;
+  --steel: #545457;
+  /* #545457 is the hairline and the caption color on white.
+     On black it is about 2.8:1, so secondary text on dark uses this lighter step. */
+  --steel-on-dark: #a9a9b2;
+  --radius-btn: 2px;
+}
+
+@theme inline {
+  --font-sans: var(--font-brand);
+  --font-mono: var(--font-mono);
+  --color-black: var(--black);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-fg: var(--fg);
+  --color-steel: var(--steel);
+  --color-steel-on-dark: var(--steel-on-dark);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  background: var(--black);
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--black);
+  color: var(--fg);
+  font-family: var(--font-brand);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  .site-header {
+    transition: none;
+  }
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.shell {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 40px;
+  }
+}
+
+.section {
+  padding-block: 72px;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 144px;
+  }
+}
+
+.h1 {
+  font-size: clamp(40px, 5.6vw, 80px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.h2 {
+  font-size: clamp(40px, 4vw, 56px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 80;
+  transform: translateY(-200%);
+  background: var(--fg);
+  color: var(--ink);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.btn-solid {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.btn-solid:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.btn-ghost:hover {
+  background: var(--fg);
+  color: #000000;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--steel-on-dark);
+}
+
+.field {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border: 0;
+  border-bottom: 1px solid var(--steel);
+  border-radius: 0;
+  background: transparent;
+  padding: 12px 0;
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+}
+
+.field:focus-visible {
+  border-bottom-color: var(--fg);
+}
+
+.site-header {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .js .reveal.is-visible {
+    animation: rise 500ms ease-out forwards;
+  }
+
+  .still-zoom {
+    transform-origin: center center;
+    animation: still-zoom 22s ease-out forwards;
+  }
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes still-zoom {
+  from {
+    transform: scale(1.045);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

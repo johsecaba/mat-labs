@@ -1,3 +1,43 @@
 # MAT Labs
 
-Landing page for MAT Labs, an AI visualization enhancer.
+Marketing site for MAT Labs Inc. (mat.co). A static Next.js app, ready to import on Vercel with no extra configuration.
+
+## Develop
+
+```bash
+npm install
+npm run dev
+```
+
+- `npm run build` — production build
+- `npm run lint` — ESLint
+
+## Type
+
+The brand face is Helvetica Now (Monotype). The license is not in this repository, and no Helvetica Now files are committed.
+
+Inter Tight is loaded with `next/font` as the stand-in. The CSS token is `--font-brand`:
+
+```css
+--font-brand: var(--font-brand-file), "Helvetica Now Display", "Helvetica Now Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+```
+
+`--font-brand-file` is the face actually loaded. To switch:
+
+1. Place the licensed `.woff2` files in `fonts/helvetica-now/`. That directory is gitignored.
+2. In `lib/fonts.ts`, remove the `Inter_Tight` export and uncomment the `next/font/local` block.
+3. Match the filenames in that block, or edit the paths. Keep `variable: "--font-brand-file"`.
+
+No other file needs to change. Headlines use weight 500. Specs use IBM Plex Mono via `--font-mono`.
+
+## Contact
+
+Demo requests open a mailto draft to `hello@mat.co`. That address is a placeholder. Change `contactEmail` in `lib/site.ts` when the inbox is decided. The form does not post to a server.
+
+## Mark
+
+`public/brand/mark.svg` is a trace of the MAT app-icon mark for the dark UI. `public/brand/app-icon.png` is the icon used for the favicon, Apple touch icon, and Organization logo. Replace the SVG if a finished vector master is available.
+
+## Media
+
+The hero is the only video (`public/media/hero-video-1080p.mp4`). Other sections use stills. `components/still.tsx` and `components/parallax-still.tsx` accept an optional `videoSrc` when a later loop exists. Leave it unset until the file is in the repo. Do not render an empty player.
